@@ -13,7 +13,6 @@ struct PredictedWeather: Decodable {
 struct HourWeather: Decodable {
     let hour: String
     let temp: Int
-    let icon: String
     let condition: WeatherCondition
     let humidity: Int
 }

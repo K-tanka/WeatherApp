@@ -33,4 +33,11 @@ enum ControllersFactory {
         controller.dataModel = dataModel
         return controller
     }
+    
+    static func initDetailViewControllerWith(_ weather: CityWeather) -> DetailViewController {
+        let dataSource = DetailViewControllerDataModelImpl(cityWeather: weather)
+        let controller = DetailViewController.initFromNib()
+        controller.dataModel = dataSource
+        return controller
+    }
 }

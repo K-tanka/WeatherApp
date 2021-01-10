@@ -20,9 +20,40 @@ final class ListViewController: UIViewController, NibInit {
     }
     
     private func initialDataRequest() {
-        dataModel?.requestInitialCitiesWeather { [weak self] in
+        dataModel?.requestInitialCitiesWeather()
+        
+        dataModel?.onDataSourceUpdated = { [weak self] in
             self?.tableView.reloadData()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupKeyboardNotification()
+    }
+    
+    private func setupKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWasShown(notification: Notification) {
+        let info = notification.userInfo! as NSDictionary
+        let kbSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)
+        
+        self.tableView?.contentInset = contentInsets
+        tableView?.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc func keyboardWillHidden(notification: Notification) {
+        let contentInsets = UIEdgeInsets.zero
+        tableView?.contentInset = contentInsets
+        tableView?.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc func hideKeyboard() {
+        self.tableView?.endEditing(true)
     }
 }
 
@@ -48,7 +79,14 @@ extension ListViewController: UITableViewDataSource {
 extension ListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected cell")
+        
+        guard let selectedCity = dataModel?.selectedCityWeather(at: indexPath.row) else {
+            assertionFailure()
+            return
+        }
+        let controller = ControllersFactory.initDetailViewControllerWith(selectedCity)
+        controller.title = selectedCity.cityName
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -67,5 +105,7 @@ extension ListViewController: UITableViewDelegate {
 }
 
 extension ListViewController: UISearchBarDelegate {
-    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        dataModel?.filterItems(by: searchText)
+    }
 }

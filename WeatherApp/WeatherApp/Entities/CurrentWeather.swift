@@ -5,7 +5,6 @@ import Foundation
 
 struct CurrentWeather: Decodable {
     let temp: Int
-    let icon: String
     let condition: WeatherCondition
     let humidity: Int
 }

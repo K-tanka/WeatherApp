@@ -17,8 +17,9 @@ enum URLRequestFactory {
         return components?.url
     }
     
-    private static func iconStringURLFactory(for icon: String) -> String {
-        return "https://yastatic.net/weather/i/icons/blueye/color/svg/\(icon).svg."
+    static func iconStringURLFactory(for icon: String) -> URLRequest {
+        let url = URL(string: "https://yastatic.net/weather/i/icons/blueye/color/svg/\(icon).svg")!
+        return URLRequest(url: url)
     }
     
     static func getURLRequest(for location: Location) -> URLRequest? {

@@ -29,6 +29,10 @@
 		FA5728E925AA487C00EFCF46 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5728E825AA487C00EFCF46 /* UITableView+Extension.swift */; };
 		FA7B1AF125AAF5200028DD70 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7B1AEF25AAF5200028DD70 /* DetailViewController.swift */; };
 		FA7B1AF225AAF5200028DD70 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7B1AF025AAF5200028DD70 /* DetailViewController.xib */; };
+		FA7B1AFA25AB00E60028DD70 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7B1AF825AB00E60028DD70 /* DetailCell.swift */; };
+		FA7B1AFB25AB00E60028DD70 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7B1AF925AB00E60028DD70 /* DetailCell.xib */; };
+		FA7B1AFE25AB0A8A0028DD70 /* DetailViewControllerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7B1AFD25AB0A8A0028DD70 /* DetailViewControllerDataModel.swift */; };
+		FA93CBCB25AB34F000DFAB7F /* HeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93CBCA25AB34F000DFAB7F /* HeaderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,10 @@
 		FA5728E825AA487C00EFCF46 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		FA7B1AEF25AAF5200028DD70 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FA7B1AF025AAF5200028DD70 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		FA7B1AF825AB00E60028DD70 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		FA7B1AF925AB00E60028DD70 /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		FA7B1AFD25AB0A8A0028DD70 /* DetailViewControllerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerDataModel.swift; sourceTree = "<group>"; };
+		FA93CBCA25AB34F000DFAB7F /* HeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +147,7 @@
 				FA5728CE25AA245400EFCF46 /* WeatherCondition.swift */,
 				FA5728D125AA247400EFCF46 /* CurrentWeather.swift */,
 				FA5728D425AA2D0600EFCF46 /* PredictedWeather.swift */,
+				FA93CBCA25AB34F000DFAB7F /* HeaderViewModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -173,10 +182,21 @@
 		FA7B1AEE25AAF4D60028DD70 /* DetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FA7B1AF725AB00BB0028DD70 /* Views */,
 				FA7B1AEF25AAF5200028DD70 /* DetailViewController.swift */,
+				FA7B1AFD25AB0A8A0028DD70 /* DetailViewControllerDataModel.swift */,
 				FA7B1AF025AAF5200028DD70 /* DetailViewController.xib */,
 			);
 			path = DetailViewController;
+			sourceTree = "<group>";
+		};
+		FA7B1AF725AB00BB0028DD70 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA7B1AF825AB00E60028DD70 /* DetailCell.swift */,
+				FA7B1AF925AB00E60028DD70 /* DetailCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +258,7 @@
 			files = (
 				FA5728E325AA42F900EFCF46 /* WeatherCell.xib in Resources */,
 				FA57289125A9E26A00EFCF46 /* LaunchScreen.storyboard in Resources */,
+				FA7B1AFB25AB00E60028DD70 /* DetailCell.xib in Resources */,
 				FA7B1AF225AAF5200028DD70 /* DetailViewController.xib in Resources */,
 				FA57288E25A9E26A00EFCF46 /* Assets.xcassets in Resources */,
 				FA5728A925A9E6D700EFCF46 /* ListViewController.xib in Resources */,
@@ -252,7 +273,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5728DD25AA382A00EFCF46 /* ListViewControllerDataModel.swift in Sources */,
+				FA93CBCB25AB34F000DFAB7F /* HeaderViewModel.swift in Sources */,
 				FA7B1AF125AAF5200028DD70 /* DetailViewController.swift in Sources */,
+				FA7B1AFA25AB00E60028DD70 /* DetailCell.swift in Sources */,
 				FA5728BF25A9FCA000EFCF46 /* NetworkHelpers.swift in Sources */,
 				FA5728E225AA42F900EFCF46 /* WeatherCell.swift in Sources */,
 				FA5728D525AA2D0600EFCF46 /* PredictedWeather.swift in Sources */,
@@ -267,6 +290,7 @@
 				FA5728CC25AA186F00EFCF46 /* HTTPURLResponse+StatusCode.swift in Sources */,
 				FA5728C425AA08AD00EFCF46 /* Location.swift in Sources */,
 				FA5728D925AA2D8700EFCF46 /* GetCityWeatherMultiRequestDecorator.swift in Sources */,
+				FA7B1AFE25AB0A8A0028DD70 /* DetailViewControllerDataModel.swift in Sources */,
 				FA5728E925AA487C00EFCF46 /* UITableView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
