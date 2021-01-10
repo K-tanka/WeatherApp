@@ -18,7 +18,7 @@ final class DetailViewControllerDataModelImpl: DetailViewControllerDataModel {
     }
     
     func numberOfElements() -> Int {
-        cityWeather.predictedWeather.count
+        3
     }
     
     func createCellModel(for index: Int) -> DetailCellViewModel {
@@ -48,6 +48,8 @@ final class DetailViewControllerDataModelImpl: DetailViewControllerDataModel {
     }
     
     func getTimeWeatherDetail(time: TimeOfDay, weather: HourWeather) -> WeatherDetailByTime {
+        
+        
         return WeatherDetailByTime(time: time, temp: "\(weather.temp) °C", condition: weather.condition.description)
     }
     

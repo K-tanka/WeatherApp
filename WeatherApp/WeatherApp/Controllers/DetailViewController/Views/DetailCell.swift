@@ -23,14 +23,14 @@ struct DetailCellViewModel {
 }
 
 final class DetailCell: UITableViewCell, WKUIDelegate {
-
+    
     @IBOutlet private weak var dateLabel: UILabel!
     
     @IBOutlet private weak var morningTempLabel: UILabel!
     @IBOutlet private weak var dayTempLabel: UILabel!
     @IBOutlet private weak var eveningTempLabel: UILabel!
     @IBOutlet private weak var nightTempLabel: UILabel!
-
+    
     @IBOutlet private weak var morningConditionLabel: UILabel!
     @IBOutlet private weak var dayConditionLabel: UILabel!
     @IBOutlet private weak var eveningConditionLabel: UILabel!
@@ -39,23 +39,21 @@ final class DetailCell: UITableViewCell, WKUIDelegate {
     func configure(_ viewModel: DetailCellViewModel) {
         dateLabel.text = viewModel.date
         
-        guard
-            let morningWeather = viewModel.weatherDetailByTime.first(where: ({ $0.time == .morning })),
-            let dayWeather = viewModel.weatherDetailByTime.first(where: ({ $0.time == .day })),
-            let eveningWeather = viewModel.weatherDetailByTime.first(where: ( {$0.time == .evening })),
-            let nightWeather = viewModel.weatherDetailByTime.first(where: ({ $0.time == .night }))
-        else {
-            return
-        }
         
-        morningTempLabel.text = morningWeather.temp
-        dayTempLabel.text = dayWeather.temp
-        eveningTempLabel.text = eveningWeather.temp
-        nightTempLabel.text = nightWeather.temp
-
-        morningConditionLabel.text = morningWeather.condition
-        dayConditionLabel.text = dayWeather.condition
-        eveningConditionLabel.text = eveningWeather.condition
-        nightConditionLabel.text = nightWeather.condition
+        let morningWeather = viewModel.weatherDetailByTime.first(where: ({ $0.time == .morning }))
+        let dayWeather = viewModel.weatherDetailByTime.first(where: ({ $0.time == .day }))
+        let eveningWeather = viewModel.weatherDetailByTime.first(where: ( {$0.time == .evening }))
+        let nightWeather = viewModel.weatherDetailByTime.first(where: ({ $0.time == .night }))
+        
+        
+        morningTempLabel.text = morningWeather?.temp
+        dayTempLabel.text = dayWeather?.temp
+        eveningTempLabel.text = eveningWeather?.temp
+        nightTempLabel.text = nightWeather?.temp
+        
+        morningConditionLabel.text = morningWeather?.condition
+        dayConditionLabel.text = dayWeather?.condition
+        eveningConditionLabel.text = eveningWeather?.condition
+        nightConditionLabel.text = nightWeather?.condition
     }
 }

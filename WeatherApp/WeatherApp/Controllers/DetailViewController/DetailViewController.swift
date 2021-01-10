@@ -5,12 +5,12 @@ import UIKit
 
 final class DetailViewController: UIViewController, NibInit {
     
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var conditionLabel: UILabel!
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var sunriseTimeLabel: UILabel!
-    @IBOutlet weak var sunsetTimeLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView! {
+    @IBOutlet private weak var cityLabel: UILabel!
+    @IBOutlet private weak var conditionLabel: UILabel!
+    @IBOutlet private weak var tempLabel: UILabel!
+    @IBOutlet private weak var sunriseTimeLabel: UILabel!
+    @IBOutlet private weak var sunsetTimeLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView! {
         willSet {
             newValue.register(nibCell: DetailCell.self)
         }
@@ -46,6 +46,9 @@ extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return  tableView.dequeue(reusable: DetailCell.self, for: indexPath)
     }
+}
+
+extension DetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? DetailCell, let cellModel = dataModel?.createCellModel(for: indexPath.row) else {
