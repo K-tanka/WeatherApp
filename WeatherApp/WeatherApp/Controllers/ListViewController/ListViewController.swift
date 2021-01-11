@@ -84,6 +84,7 @@ extension ListViewController: UITableViewDelegate {
             assertionFailure()
             return
         }
+        hideKeyboard()
         let controller = ControllersFactory.initDetailViewControllerWith(selectedCity)
         controller.title = selectedCity.cityName
         navigationController?.pushViewController(controller, animated: true)
@@ -105,7 +106,12 @@ extension ListViewController: UITableViewDelegate {
 }
 
 extension ListViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         dataModel?.filterItems(by: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hideKeyboard()
     }
 }

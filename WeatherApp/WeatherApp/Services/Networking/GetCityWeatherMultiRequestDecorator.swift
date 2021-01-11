@@ -6,8 +6,15 @@ import Foundation
 final class GetCityWeatherMultiRequestDecorator {
     
     private let networkService: GetCityWeatherService
-    private let concurrentQueue = DispatchQueue(label: "com.get.request.weather", qos: .userInitiated, attributes: .concurrent)
-    private let group = DispatchGroup()
+    
+    private let queue: OperationQueue =  {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        queue.qualityOfService = .userInteractive
+        return queue
+    }()
+    
+    private let semaphore = DispatchSemaphore(value: 0)
     
     init(networkService: GetCityWeatherService) {
         self.networkService = networkService
@@ -15,26 +22,23 @@ final class GetCityWeatherMultiRequestDecorator {
     
     func requestWeatherForDefaultCities(requests: [URLRequest], completion: @escaping ([CityWeather]) -> Void) {
         var weathers = [CityWeather]()
-        
+    
         requests.forEach { [weak self] urlRequest in
-            
-            self?.group.enter()
-            concurrentQueue.async {
-                self?.networkService.getWeather(request: urlRequest, completion: { [weak self] result in
+    
+            queue.addOperation {
+                self?.networkService.getWeather(request: urlRequest, completion: { result in
                     switch result {
                     case let .success(weather):
                         weathers.append(weather)
                     case .failure(_):
-                        // Можно добавить обработку ошибок и в completion вернуть массив Swift.Result впоследствии отбразить юзеру ошибки по конкретным городам
                         assertionFailure()
                     }
-                    self?.group.leave()
+                    self?.semaphore.signal()
                 })
             }
+            self?.semaphore.wait()
         }
-        group.wait()
-        group.notify(queue: DispatchQueue.main) {
-            completion(weathers)
-        }
+
+        completion(weathers)
     }
 }
