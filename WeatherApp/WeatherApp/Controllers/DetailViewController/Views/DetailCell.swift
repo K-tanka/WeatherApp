@@ -2,7 +2,6 @@
 //  Created by MacBook Pro on 1/10/21.
 //
 import UIKit
-import WebKit
 
 enum TimeOfDay {
     case morning
@@ -22,7 +21,7 @@ struct DetailCellViewModel {
     var weatherDetailByTime: [WeatherDetailByTime]
 }
 
-final class DetailCell: UITableViewCell, WKUIDelegate {
+final class DetailCell: UITableViewCell {
     
     @IBOutlet private weak var dateLabel: UILabel!
     
@@ -39,13 +38,11 @@ final class DetailCell: UITableViewCell, WKUIDelegate {
     func configure(_ viewModel: DetailCellViewModel) {
         dateLabel.text = viewModel.date
         
-        
         let morningWeather = viewModel.weatherDetailByTime.first(where: ({ $0.time == .morning }))
         let dayWeather = viewModel.weatherDetailByTime.first(where: ({ $0.time == .day }))
         let eveningWeather = viewModel.weatherDetailByTime.first(where: ( {$0.time == .evening }))
         let nightWeather = viewModel.weatherDetailByTime.first(where: ({ $0.time == .night }))
-        
-        
+                
         morningTempLabel.text = morningWeather?.temp
         dayTempLabel.text = dayWeather?.temp
         eveningTempLabel.text = eveningWeather?.temp

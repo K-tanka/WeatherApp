@@ -17,11 +17,6 @@ enum URLRequestFactory {
         return components?.url
     }
     
-    static func iconStringURLFactory(for icon: String) -> URLRequest {
-        let url = URL(string: "https://yastatic.net/weather/i/icons/blueye/color/svg/\(icon).svg")!
-        return URLRequest(url: url)
-    }
-    
     static func getURLRequest(for location: Location) -> URLRequest? {
         guard let url = weatherURLFactory(for: location) else {
             assertionFailure()

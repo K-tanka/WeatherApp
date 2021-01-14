@@ -44,7 +44,7 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return  tableView.dequeue(reusable: DetailCell.self, for: indexPath)
+        return tableView.dequeue(reusable: DetailCell.self, for: indexPath)
     }
 }
 

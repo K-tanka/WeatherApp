@@ -20,8 +20,8 @@ final class ListViewController: UIViewController, NibInit {
     }
     
     private func initialDataRequest() {
-        dataModel?.requestInitialCitiesWeather()
         
+        dataModel?.requestInitialCitiesWeather()
         dataModel?.onDataSourceUpdated = { [weak self] in
             self?.tableView.reloadData()
         }
