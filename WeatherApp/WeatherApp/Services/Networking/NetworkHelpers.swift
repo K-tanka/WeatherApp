@@ -8,7 +8,7 @@ enum URLRequestFactory {
     private static let baseURL = "https://api.weather.yandex.ru/v2/forecast?"
     
     private static let keyHeader = "X-Yandex-API-Key"
-    private static let apiKey = "6802647c-aaff-4a4f-b5d8-62c4a1cf5ec0"
+    private static let apiKey = "56e837fd-8518-40c6-96ae-42b285f6d4f7"
     
     private static func weatherURLFactory(for location: Location) -> URL? {
         var components = URLComponents(string: baseURL)
